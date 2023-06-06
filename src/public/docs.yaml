@@ -1,0 +1,139 @@
+openapi: 3.0.0
+info:
+  title: User API
+  description: API for managing user data
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /users:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: Caue Santos
+              email: caue.santos@example.com                
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+              example:
+                id: 1
+                name: Caue Santos
+                email: caue.santos@example.com                
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              examples:
+                example1:
+                  value:
+                    - id: 1
+                      name: Caue Santos
+                      email: caue.santos@example.com 
+                    - id: 2
+                      name: Jane Smith
+                      email: jane.smith@example.com
+                    - id: 3
+                      name: Alice Johnson
+                      email: alice.johnson@example.com  
+                  
+
+  /users/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+              example:
+                id: 1
+                name: Caue Santos
+                email: caue.santos@example.com                  
+    put:
+      summary: Update a user
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              id: 1
+              name: Cauê R. Santos
+              email: caue.santos@example.com                
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+              example:
+                  id: 1
+                  name: Cauê R. Santos
+                  email: caue.santos@example.com    
+    delete:
+      summary: Delete a user
+      parameters:
+        - name: id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        email:
+          type: string
+      
