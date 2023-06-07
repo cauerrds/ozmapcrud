@@ -15,8 +15,8 @@ chai.use(chaiHttp);
 
 const { expect } = chai
 
-describe('Testes da aplicacao', () => {
-  it('Server is online', done => {
+describe('Testes da aplicação', () => {
+  it('Servidor esta online', done => {
     chai.request(server)
       .get('/')
       .end((err, res) => {
@@ -26,7 +26,7 @@ describe('Testes da aplicacao', () => {
       })
   })
 
-  it('deveria ser uma lista vazia de usuarios', done => {
+  it('deveria ser uma lista vazia de usuários', done => {
     chai.request(server)
       .get('/users')
       .end((err, res) => {
@@ -37,7 +37,7 @@ describe('Testes da aplicacao', () => {
       })
   })
 
-  it('Deveria criar um usuario Caue', done => {
+  it('Deveria criar um usuário Caue', done => {
     const user: IUser = {
       id: 1,
       name: 'Caue Santos',
@@ -66,7 +66,7 @@ describe('Testes da aplicacao', () => {
       });
   });
 
-  it('should remove the specified user', done => {
+  it('Deveria remover usuário com id 1', done => {
     const userId = 1;
 
     const removeStub = sinon.stub(userModel, 'remove');
@@ -81,7 +81,7 @@ describe('Testes da aplicacao', () => {
       });
   });
 
-  it('Econtrar um unico usuario', done => {
+  it('Deveria encontrar um único usuário com id 1', done => {
     const user = {
       id: 1,
       name: 'Caue Santos',
@@ -108,7 +108,7 @@ describe('Testes da aplicacao', () => {
   });
 
 
-  it('should return all users', done => {
+  it('Deveria retornar uma lista de usuários', done => {
     const users = [
       {
         id: 1,
@@ -152,7 +152,7 @@ describe('Testes da aplicacao', () => {
       });
   })
 
-  it('should update the specified user', done => {
+  it('Deveria alterar usuário com id 1', done => {
     const user = {
       id: 1,
       name: 'Caue Santos',
