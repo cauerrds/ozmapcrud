@@ -1,11 +1,11 @@
 
 export interface ICreateUserRequest {
-    name: string;
-    email: string;
-    createdOn: Date;
-    updatedOn: Date;
-    birthdate: string;
-  }
+    name: string
+    email: string
+    createdOn: Date
+    updatedOn: Date
+    birthdate: string
+}
 
 export interface IUser {
     id: number
@@ -21,6 +21,6 @@ export interface IUserResponse extends IUser {
 }
 
 export interface IUpdateUserRequest {
-    name?: string;
-    email?: string;  
+    name?: string
+    email?: string
 }

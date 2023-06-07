@@ -1,9 +1,9 @@
-import Router from "koa-router"
+import Router from 'koa-router'
 
 
-var router = new Router()
+const router = new Router()
 
-router.get('/', async (ctx) => {
+router.get('/', ctx => {
     try {
         ctx.body = {
             uptime: process.uptime(),
@@ -13,10 +13,10 @@ router.get('/', async (ctx) => {
     } catch (err) {
         ctx.status = 500
         ctx.body = {
-            message: "Server internal error"
-          }
+            message: 'Server internal error'
+        }
     }
 
-  });
+});
 
-  export default router
+export default router

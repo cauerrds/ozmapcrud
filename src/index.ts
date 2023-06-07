@@ -1,25 +1,17 @@
-//Voce deve rodar os testes usando:  npm test
-//Para testar a aplicação, rode: npm run dev
-
-//mais infos
-//https://github.com/ZijianHe/koa-router
-
-// todas as configuraçoes devem ser passadas via environment variables
-
-import Koa from "koa"
-import healthcheckRoutes from "./routes/healthcheck"
-import usersRoutes from "./routes/users"
-import { config } from "./config";
-import { koaSwagger } from "koa2-swagger-ui";
-import yaml from "yamljs";
-import bodyParser from "koa-bodyparser";
-import { database } from "./db";
-import { errorHandling } from "./middlewares/error.middleware";
+import Koa from 'koa'
+import { koaSwagger } from 'koa2-swagger-ui';
+import yaml from 'yamljs';
+import bodyParser from 'koa-bodyparser';
+import healthcheckRoutes from './routes/healthcheck'
+import usersRoutes from './routes/users'
+import { config } from './config';
+import { database } from './db';
+import { errorHandling } from './middlewares/error.middleware';
 
 const koa = new Koa();
 
 
-const spec = yaml.load("./src/public/docs.yaml")
+const spec = yaml.load('./src/public/docs.yaml')
 usersRoutes.get('/docs', koaSwagger({ routePrefix: false, swaggerOptions: { spec } }))
 
 
@@ -36,7 +28,7 @@ koa
 
 
 
-const server = koa.listen(config.PORT ,async () => {
+const server = koa.listen(config.PORT, async () => {
   const db = await database.openConnection()
   db.close()
   console.log(`Server running in  http://localhost:${config.PORT}`);
@@ -45,4 +37,4 @@ const server = koa.listen(config.PORT ,async () => {
 });
 
 
-export {server}
+export { server }

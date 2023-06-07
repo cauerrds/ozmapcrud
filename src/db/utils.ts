@@ -1,4 +1,4 @@
-import sqlite3 from 'sqlite3';
+import sqlite3 from 'sqlite3'
 
 const SQL_USERS_CREATE = `
 CREATE TABLE users (
@@ -10,39 +10,38 @@ CREATE TABLE users (
   birthdate TEXT
 );`
 
-const createDatabase = async (db_source: string) => {
-    const newdb = new sqlite3.Database(db_source, (err) => {
-      if (err) {
-          throw err
+const createDatabase = (dbSource: string) => {
+  const newdb = new sqlite3.Database(dbSource, err => {
+    if (err != null) {
+      throw err
+    }
+  })
+  createUserTable(newdb)
+  return newdb
+}
+
+const createUserTable = (db: sqlite3.Database) => {
+  db.run(SQL_USERS_CREATE, err => {
+    if (err != null) {
+      throw err
+    }
+  })
+}
+
+const dbQuery = (db: sqlite3.Database, query: string, params?: any[]): Promise<any[]> => {
+  return new Promise<any[]>((resolve, reject) => {
+    db.all(query, params, (err, rows) => {
+      if (err != null) {
+        reject(err)
+      } else {
+        resolve(rows)
       }
-    });
-    await createUserTable(newdb)
-    return newdb
-}
-
-const createUserTable = async (db: sqlite3.Database ) => {
-    db.run(SQL_USERS_CREATE, (err)=> {
-     if (err){
-        throw err   
-     } 
-   })
-}
-
-const dbQuery = async (db: sqlite3.Database ,query: string, params?: any[]) => {
-    return new Promise<any[]>((resolve, reject) => {
-        db.all(query, params, (err, rows)=>{
-            if (err){
-              reject(err)
-            } else {
-              resolve(rows)
-            }
-        })
     })
- }
-
+  })
+}
 
 export const dbUtils = {
-    createDatabase,
-    createUserTable,
-    dbQuery
+  createDatabase,
+  createUserTable,
+  dbQuery
 }

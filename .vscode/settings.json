@@ -1,0 +1,10 @@
+{
+    "eslint.enable": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+}

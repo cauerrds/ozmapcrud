@@ -1,25 +1,20 @@
-import sqlite3 from 'sqlite3';
-import { config } from '../config';
-import { dbUtils } from './utils';
+import sqlite3 from 'sqlite3'
+import { dbUtils } from './utils'
+import { config } from '../config'
 
-
-
-const openConnection = async () => {
-  let db_source = config.DB_SOURCE
-  if (process.env.npm_lifecycle_event === 'test'){
-    db_source = "test.db"
+const openConnection = () => {
+  let dbSource = config.DB_SOURCE
+  if (process.env.npm_lifecycle_event === 'test') {
+    dbSource = 'test.db'
   }
 
-  const db = new sqlite3.Database(db_source, sqlite3.OPEN_READWRITE, async (err)=>{ 
-    if (err){
-      const db = await dbUtils.createDatabase(db_source)
-      return db
+  return new sqlite3.Database(dbSource, sqlite3.OPEN_READWRITE, err => {
+    if (err != null) {
+      return dbUtils.createDatabase(dbSource)
     }
-    })
-   return db
+  })
 }
 
 export const database = {
   openConnection
 }
-
