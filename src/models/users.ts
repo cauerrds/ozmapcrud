@@ -66,6 +66,8 @@ const remove = async (id: number) => {
 
 
 
+
+
 export const userModel = {
     create,
     findAll,

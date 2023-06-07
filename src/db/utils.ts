@@ -13,8 +13,7 @@ CREATE TABLE users (
 const createDatabase = async (db_source: string) => {
     const newdb = new sqlite3.Database(db_source, (err) => {
       if (err) {
-          console.log("Getting error " + err);
-          return
+          throw err
       }
     });
     await createUserTable(newdb)
@@ -24,10 +23,8 @@ const createDatabase = async (db_source: string) => {
 const createUserTable = async (db: sqlite3.Database ) => {
     db.run(SQL_USERS_CREATE, (err)=> {
      if (err){
-       console.log("err on create table", err.message);    
-     } else {
-       console.log('Table users created with success')
-     }
+        throw err   
+     } 
    })
 }
 

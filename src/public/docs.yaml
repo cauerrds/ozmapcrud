@@ -17,7 +17,8 @@ paths:
               type: object
             example:
               name: Caue Santos
-              email: caue.santos@example.com                
+              email: caue.santos@example.com
+              birthdate: "1996/09/28"
       responses:
         '200':
           description: OK
@@ -26,11 +27,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
               example:
-                id: 1
+                id: 1 
                 name: Caue Santos
-                email: caue.santos@example.com                
+                email: caue.santos@example.com    
+                createdOn: '2023-06-06T23:51:45.187Z'           
+                updatedOn: '2023-06-06T23:51:45.187Z'           
+                birthdate: '1996-09-28T03:00:00.000Z'  
+                age: 26         
     get:
       summary: Get all users
+      parameters:
+         - in: path
+           name: page
+           schema: 
+              type: integer
+         - in: path
+           name: pageSize
+           schema: 
+              type: integer    
       responses:
         '200':
           description: OK
@@ -43,17 +57,41 @@ paths:
               examples:
                 example1:
                   value:
-                    - id: 1
+                    - id: 1 
                       name: Caue Santos
-                      email: caue.santos@example.com 
-                    - id: 2
-                      name: Jane Smith
-                      email: jane.smith@example.com
-                    - id: 3
-                      name: Alice Johnson
-                      email: alice.johnson@example.com  
-                  
-
+                      email: caue.santos@example.com    
+                      createdOn: '2023-06-06T23:51:45.187Z'           
+                      updatedOn: '2023-06-06T23:51:45.187Z'           
+                      birthdate: '1996-09-28T03:00:00.000Z'  
+                      age: 26 
+                    - id: 2 
+                      name: Caue Rafael
+                      email: caue.rafael@example.com    
+                      createdOn: '2023-06-06T23:51:45.187Z'           
+                      updatedOn: '2023-06-06T23:51:45.187Z'           
+                      birthdate: '1996-09-28T03:00:00.000Z'  
+                      age: 26 
+                    - id: 3 
+                      name: Caue Rodrigues
+                      email: caue.rodrigues@example.com    
+                      createdOn: '2023-06-06T23:51:45.187Z'           
+                      updatedOn: '2023-06-06T23:51:45.187Z'           
+                      birthdate: '1996-09-28T03:00:00.000Z'  
+                      age: 26 
+                    - id: 5 
+                      name: Caue 
+                      email: caue@example.com    
+                      createdOn: '2023-06-06T23:51:45.187Z'           
+                      updatedOn: '2023-06-06T23:51:45.187Z'           
+                      birthdate: '1996-09-28T03:00:00.000Z'  
+                      age: 26                       
+                    - id: 5
+                      name: Cave
+                      email: cave@example.com    
+                      createdOn: '2023-06-06T23:51:45.187Z'           
+                      updatedOn: '2023-06-06T23:51:45.187Z'           
+                      birthdate: '1996-09-28T03:00:00.000Z'  
+                      age: 26                                  
   /users/{id}:
     get:
       summary: Get a user by ID
@@ -72,9 +110,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
               example:
-                id: 1
+                id: 1 
                 name: Caue Santos
-                email: caue.santos@example.com                  
+                email: caue.santos@example.com    
+                createdOn: '2023-06-06T23:51:45.187Z'           
+                updatedOn: '2023-06-06T23:51:45.187Z'           
+                birthdate: '1996-09-28T03:00:00.000Z'  
+                age: 26                 
     put:
       summary: Update a user
       parameters:
@@ -91,9 +133,7 @@ paths:
             schema:
               type: object
             example:
-              id: 1
-              name: Cauê R. Santos
-              email: caue.santos@example.com                
+              name: Cauê rrds     
       responses:
         '200':
           description: OK
@@ -102,9 +142,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
               example:
-                  id: 1
-                  name: Cauê R. Santos
-                  email: caue.santos@example.com    
+                id: 1 
+                name: Cauê rrds
+                email: caue.santos@example.com    
+                createdOn: '2023-06-06T23:51:45.187Z'           
+                updatedOn: '2023-06-06T23:51:45.187Z'           
+                birthdate: '1996-09-28T03:00:00.000Z'  
+                age: 26     
     delete:
       summary: Delete a user
       parameters:
@@ -117,7 +161,63 @@ paths:
       responses:
         '200':
           description: OK
-
+  /users/{name}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - name: name
+          in: path
+          description: User Name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+              example:
+                id: 1 
+                name: Cauê rrds
+                email: caue.santos@example.com    
+                createdOn: '2023-06-06T23:51:45.187Z'           
+                updatedOn: '2023-06-06T23:51:45.187Z'           
+                birthdate: '1996-09-28T03:00:00.000Z'  
+                age: 26               
+    put:
+      summary: Update a user
+      parameters:
+        - name: name
+          in: path
+          description: User Name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              name: Cauê         
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+              example:
+                id: 1 
+                name: Cauê
+                email: caue.santos@example.com    
+                createdOn: '2023-06-06T23:51:45.187Z'           
+                updatedOn: '2023-06-06T23:51:45.187Z'           
+                birthdate: '1996-09-28T03:00:00.000Z'  
+                age: 26   
 components:
   schemas:
     User:
@@ -127,6 +227,8 @@ components:
           type: string
         email:
           type: string
+        birthdate: 
+          type: Date 
     UserResponse:
       type: object
       properties:

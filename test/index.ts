@@ -1,11 +1,10 @@
 import { server} from "../src/index"
 
-import chai, { use } from "chai"
+import chai from "chai"
 import chaiHttp from "chai-http"
-import { userModel } from "../src/models/users"
-import { ICreateUserRequest, IUser } from "../src/interfaces/user.interface"
-import { helpers } from "../src/helpers/helpers"
+
 import chaiJsonSchema = require("chai-json-schema")
+import { testModel } from "../src/models/test"
 
 chai.use(chaiHttp);
 chai.use(chaiJsonSchema);
@@ -44,6 +43,10 @@ const userSchema = {
 const expect = chai.expect
 
 describe('Um simples conjunto de testes', function () {
+    this.afterAll(async ()=>{
+            testModel.resetDb()
+    })
+
     it('o servidor esta online', function (done) {
         chai.request(server)
         .get('/')
@@ -213,5 +216,14 @@ describe('Um simples conjunto de testes', function () {
         });
     });
 
-
+    it("Deveria retornar uma lista na pagina 1 com 5 usuarios, paramos invalidos", function (done) {
+        chai.request(server)
+        .get("/users?page=ozmap&pageSize=[teste, caue, ozmap]")
+        .end(function (err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body.length).to.be.at.least(5);
+        done();
+        });
+    });
 })

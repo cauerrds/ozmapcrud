@@ -3,6 +3,7 @@ import { config } from '../config';
 import { dbUtils } from './utils';
 
 
+
 const openConnection = async () => {
   let db_source = config.DB_SOURCE
   if (process.env.npm_lifecycle_event === 'test'){
