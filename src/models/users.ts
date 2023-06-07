@@ -23,7 +23,7 @@ const create = async (user: ICreateUserRequest): Promise<IUser> => {
 const findAll = async (page: number, pageSize: number): Promise<IUser[]> => {
     const db = await database.openConnection()
     const offset = (page - 1) * pageSize
-    const users = await dbUtils.dbQuery(db, 'SELECT * FROM users LIMIT ? OFFSET ?', [pageSize, offset])
+    const users = await dbUtils.dbQuery(db, 'SELECT * FROM users WHERE active=1 LIMIT ? OFFSET ? ', [pageSize, offset])
 
     db.close()
     return users
@@ -32,7 +32,7 @@ const findAll = async (page: number, pageSize: number): Promise<IUser[]> => {
 const findOneById = async (id: number): Promise<IUser> => {
     const db = await database.openConnection()
 
-    const user = await dbUtils.dbQuery(db, 'SELECT * FROM users WHERE id=?', [id])
+    const user = await dbUtils.dbQuery(db, 'SELECT * FROM users WHERE id=? AND active=1', [id])
 
     db.close()
     return user[0]
@@ -41,7 +41,7 @@ const findOneById = async (id: number): Promise<IUser> => {
 const findOneByName = async (name: string): Promise<IUser> => {
     const db = await database.openConnection()
 
-    const user = await dbUtils.dbQuery(db, 'SELECT * FROM users WHERE name=?', [name])
+    const user = await dbUtils.dbQuery(db, 'SELECT * FROM users WHERE name=? AND active=1', [name])
 
     db.close()
     return user[0]
@@ -50,7 +50,7 @@ const findOneByName = async (name: string): Promise<IUser> => {
 const update = async (user: IUser): Promise<IUser> => {
     const db = await database.openConnection()
 
-    await dbUtils.dbQuery(db, 'UPDATE users SET name = ?, email = ?, updatedOn = ? WHERE id = ?', [user.name, user.email, user.updatedOn.toISOString(), user.id])
+    await dbUtils.dbQuery(db, 'UPDATE users SET name = ?, email = ?, updatedOn = ? WHERE id = ? AND active=1', [user.name, user.email, user.updatedOn.toISOString(), user.id])
     const updatedUser = findOneById(user.id)
 
     db.close()
@@ -60,7 +60,7 @@ const update = async (user: IUser): Promise<IUser> => {
 const remove = async (id: number) => {
     const db = await database.openConnection()
 
-    await dbUtils.dbQuery(db, 'DELETE FROM users WHERE id=?', [id])
+    await dbUtils.dbQuery(db, 'UPDATE users SET active=0 WHERE id=?', [id])
 
     db.close()
 }

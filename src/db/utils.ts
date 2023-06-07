@@ -7,7 +7,8 @@ CREATE TABLE users (
   email TEXT UNIQUE,
   createdOn TEXT,
   updatedOn TEXT,
-  birthdate TEXT
+  birthdate TEXT,
+  active INTEGER DEFAULT 1
 );`
 
 const createDatabase = (dbSource: string) => {

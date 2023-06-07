@@ -28,12 +28,16 @@ const calculateAge = (birthdate: Date): number => {
 }
 
 const formatUserResponse = (user: IUser): IUserResponse => {
-  console.log(user);
 
   const age = helpers.calculateAge(user.birthdate)
 
   const userResponse: IUserResponse = {
-    ...user,
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    createdOn: user.createdOn,
+    updatedOn: user.updatedOn,
+    birthdate: user.birthdate,
     age
   }
   return userResponse
