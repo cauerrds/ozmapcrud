@@ -26,7 +26,7 @@ describe('Testes da aplicação', () => {
       })
   })
 
-  it('deveria ser uma lista vazia de usuários', done => {
+  it('Deveria ser uma lista vazia de usuários', done => {
     chai.request(server)
       .get('/users')
       .end((err, res) => {
