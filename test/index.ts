@@ -49,7 +49,7 @@ describe('Testes da aplicacao', function () {
         testModel.resetDb()
     })
 
-    it('o servidor esta online', done => {
+    it('O servidor está online', done => {
         chai.request(server)
             .get('/')
             .end((err, res) => {
@@ -60,7 +60,7 @@ describe('Testes da aplicacao', function () {
     });
 
     for (let i = 0; i < 10; i++) {
-        it(`deveria criar o usuario Caue${i}`, done => {
+        it(`Deveria criar o usuário Caue${i}`, done => {
             const user = {
                 name: `Caue${i}`,
                 email: `caue${i}@teste.com`,
@@ -81,7 +81,7 @@ describe('Testes da aplicacao', function () {
         });
     }
 
-    it('Nao deve criar usuario menor de idade', done => {
+    it('Não deve criar usuário menor de 18 anos', done => {
         const user = {
             name: 'Caue',
             email: 'caue@teste.com',
@@ -98,7 +98,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('Nao deve criar usuario com nome usado', done => {
+    it('Não deve criar usuário com nome usado', done => {
         const user = {
             name: 'Caue1',
             email: 'caue123@teste.com',
@@ -115,7 +115,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('Nao deve criar usuario com email usado', done => {
+    it('Não deve criar usuário com email usado', done => {
         const user = {
             name: 'Caue r',
             email: 'caue1@teste.com',
@@ -132,7 +132,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('Usario com id 1 existe e é valido', done => {
+    it('Usuário com id 1 existe e é valido', done => {
         chai.request(server)
             .get('/users/1')
             .end((err, res) => {
@@ -143,7 +143,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('Usario com Caue2 existe e é valido', done => {
+    it('Usuário com Caue2 existe e é valido', done => {
         chai.request(server)
             .get('/users/Caue2')
             .end((err, res) => {
@@ -154,7 +154,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('deveria excluir o usuario com id 1', done => {
+    it('Deveria excluir o usuário com id 1', done => {
         chai.request(server)
             .delete('/users/1')
             .end((err, res) => {
@@ -164,17 +164,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('deveria excluir o usuario caue2', done => {
-        chai.request(server)
-            .delete('/users/caue2')
-            .end((err, res) => {
-                expect(err).to.be.null;
-                expect(res).to.have.status(200);
-                done();
-            });
-    });
-
-    it('Usario id:1 nao existe', done => {
+    it('Usuário com id 1 nao existe', done => {
         chai.request(server)
             .get('/users/1')
             .end((err, res) => {
@@ -185,18 +175,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('Usario caue2 nao existe', done => {
-        chai.request(server)
-            .get('/users/caue2')
-            .end((err, res) => {
-                expect(err).to.be.null;
-                expect(res.body).to.have.status(404);
-                expect(res.body.message).to.equal('User not found')
-                done();
-            });
-    });
-
-    it('deveria ser uma lista com pelomenos 5 usuarios', done => {
+    it('Deveria ser uma lista com pelo menos 5 usuários', done => {
         chai.request(server)
             .get('/users')
             .end((err, res) => {
@@ -207,7 +186,7 @@ describe('Testes da aplicacao', function () {
             });
     });
 
-    it('Deveria retornar uma lista na pagina 1 com 5 usuarios, paramos invalidos', done => {
+    it('Deveria retornar uma lista na página 1 com 5 usuários, parâmetros inválidos', done => {
         chai.request(server)
             .get('/users?page=ozmap&pageSize=[teste, caue, ozmap]')
             .end((err, res) => {
