@@ -65,3 +65,8 @@
 - PUT /users/:name Edita os dados de um usuário existente. O Nome do usuário deve ser fornecido como parâmetro na URL, e os novos dados devem ser enviados no corpo da requisição.
 
 - DELETE /users/:id: Remove um usuário existente. O ID do usuário deve ser fornecido como parâmetro na URL.
+
+- DOCS /docs Acessar documentação via swagger
+
+
+
