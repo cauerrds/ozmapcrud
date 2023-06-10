@@ -16,7 +16,7 @@
 ### Siga as instruções abaixo para configurar e executar o projeto:
 
 
-#### 1. Faça o download do arquivo do projeto e descompacte-o em um diretório de fácil acesso.
+#### 1. Faça o clone do repositório em diretório de fácil acesso.
 
 #### 2. Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo em: https://nodejs.org
 
